@@ -1,0 +1,147 @@
+组件的定义： 有全局组件，和局部组件
+  全局组建 	
+   	创建组件 
+   	方法1
+  		var c = Vue.extend({
+		template:`模板`，
+		})；
+ 	注册组件 Vue.component("dsada",c);
+ 	方法2
+		Vue.component("my-component",{
+		    template:'<div>这是一个全局组件测试 </div>'
+		});
+		new Vue({
+		    el:"#app5"
+		})
+
+//(局部components)
+
+	new Vue({
+	    el:"#app6",
+	    components:{
+	        'test-component':{
+	            template:"<div>这是一个局部的组件测试</div>"
+	        }
+	    }
+	});
+
+
+
+
+
+Vue.component("组件名字"，{
+    //定义传进来的数据 props也可以动态绑定，需要在组件标签中进行绑定 并且可以进行验证
+    props:[],
+	template:``,
+	data:function(){
+		//说明 组件中的date必须是函数 ，否则会修改data
+	}，
+	methods:{
+		//方法	
+	},
+	computed:{
+		计算属性
+	},
+	watch:{
+	}，
+	component:{
+	}
+	
+})
+非父子组件通信  用一个空的Vue实例 进行扭转
+
+ var bus= new Vue();
+ bus.$emit("时间"，1)；
+ bus.$on("事件"，1)
+
+子组件向父组件中传参用的时候 emit， this.$emit("事件"，参数1)  父组件接受的时候是   @事件=方法（参数2） 参数1等于参数2
+ 父组件往子组件传参的时候  broadcast  this.$broadcase("事件"，参数) 子组件接受的时候是 @事件=方法（参数2） 参数等于参数2
+ 
+动态模板的生成  需要用到keep-alive标签，  keep-live 可以保持它的状态，避免重新渲染 
+                     <keep-alive>
+                       <component :is="current"></component>
+                     <keep-alive>
+<div id="app">
+	<input type="button" value="切换到第一个组件" @click="tabComponent(1)"> 
+	<input type="button" value="切换到第一个组件" @click="tabComponent(2)"> 
+	<input type="button" value="切换到第一个组件" @click="tabComponent(3)"> 
+	<input type="button" value="切换到第一个组件" @click="tabComponent(4)"> 
+	<keep-alive>
+ 		<component :is="current"></component>
+ 	<keep-alive>
+</div>
+<script>
+	var customer1=Vue.component("customer1",{
+		template:``<div @click="clickme">我是第一个组件</div>,
+		methods:{
+			clickme(e){
+				e.traget.style.background="red";
+			}
+		}
+	});var customer1=Vue.component("customer1",{
+		template:``<div @click="clickme">我是第一个组件</div>,
+		methods:{
+			clickme(e){
+				e.traget.style.background="red";
+			}
+		}
+	});var customer1=Vue.component("customer1",{
+		template:``<div @click="clickme">我是第一个组件</div>,
+		methods:{
+			clickme(e){
+				e.traget.style.background="red";
+			}
+		}
+	});var customer1=Vue.component("customer1",{
+		template:``<div @click="clickme">我是第一个组件</div>,
+		methods:{
+			clickme(e){
+				e.traget.style.background="red";
+			}
+		}
+	});
+	
+	new Vue({
+		el:"#app",
+		data:{
+			current:customer1
+		},
+		methods:{
+			tabCOmponent(index){
+						if(index==1){
+							this.current = customer1;
+						}else if(index==2){
+							this.current = customer2;
+						}else if(index==3){
+							this.current = customer3;
+						}else{
+							this.current = cuetomer4;
+						}
+					}
+		}
+	})
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>

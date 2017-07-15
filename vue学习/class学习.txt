@@ -1,0 +1,12 @@
+Class与Style绑定
+    *变量语法：v-bind:class="{'class-a':isA, 'class-b':isB}"
+           data:{isA:true, isB:false}
+    *对象语法：v-bind:class="classObj"        
+            data:{classObj:{'class-a':true, 'class-b':false}}
+    *数组语法：v-bind:class='[classA, classB]'   
+            data:{classA:'class-a', classB:'class-b'}
+            
+
+
+  表单控件中  v-model="checked"  选中为true  没选中为false
+      select中    v-model="selected" 选中为true 选错位false
